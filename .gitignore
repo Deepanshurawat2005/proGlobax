@@ -1,0 +1,33 @@
+# --- Virtual Environments (Catch-all for any level) ---
+.venv/
+**/.venv/
+venv/
+**/venv/
+env/
+**/env/
+
+# --- Python Cache & Compiled Files ---
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Dependencies & Build ---
+node_modules/
+**/node_modules/
+dist/
+build/
+
+# --- Environment & Secrets ---
+.env
+.env.*
+*.local
+
+# --- Editor & System Files ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+/backend/vector_db/storage

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>proGlobax Isolation Tester</title>
+    <style>
+        body { font-family: sans-serif; background: #121212; color: #eee; padding: 40px; max-width: 900px; margin: auto; }
+        .box { background: #1e1e1e; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid #3b82f6; }
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; background: #2a2a2a; border: 1px solid #444; color: #fff; border-radius: 4px; }
+        button { background: #2563eb; color: #fff; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; font-weight: bold; }
+        button:hover { background: #1d4ed8; }
+        #log { background: #000; color: #0f0; padding: 15px; font-family: monospace; white-space: pre-wrap; border-radius: 4px; border: 1px solid #333; }
+        .label { font-size: 12px; color: #888; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <h1>RAG Isolation Tester</h1>
+
+    <div class="box">
+        <h3>Step 1: Save Data to Specific Silo</h3>
+        <div class="label">Collection Name (e.g. user_alpha_docs)</div>
+        <input type="text" id="targetIndex" value="textile_laws">
+        <div class="label">Context to store</div>
+        <textarea id="docText">REACH certification is mandatory for EU textiles.</textarea>
+        <button onclick="runIngest()">Save to Vector DB</button>
+    </div>
+
+    <div class="box" style="border-left-color: #10b981;">
+        <h3>Step 2: Retrieve from Specific Silo</h3>
+        <div class="label">Search in these indexes (comma separated)</div>
+        <input type="text" id="searchIndexes" value="textile_laws">
+        <div class="label">Query</div>
+        <input type="text" id="query" value="What is mandatory for EU?">
+        <button onclick="runSearch()">Search Now</button>
+    </div>
+
+    <div class="box" style="border-left-color: #f59e0b;">
+        <h3>Live Terminal Output</h3>
+        <div id="log">Awaiting action...</div>
+    </div>
+
+    <script>
+        const API = "http://127.0.0.1:8003/api/v1";
+
+        async function runIngest() {
+            updateLog("Ingesting...");
+            const res = await fetch(`${API}/ingest_vector_db`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    text: document.getElementById('docText').value,
+                    target_index: document.getElementById('targetIndex').value
+                })
+            });
+            const data = await res.json();
+            updateLog(data);
+        }
+
+        async function runSearch() {
+            updateLog("Searching...");
+            const indexes = document.getElementById('searchIndexes').value.split(',').map(s => s.trim());
+            const res = await fetch(`${API}/access_vector_db`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    query: document.getElementById('query').value,
+                    index_list: indexes
+                })
+            });
+            const data = await res.json();
+            updateLog(data);
+        }
+
+        function updateLog(msg) {
+            document.getElementById('log').textContent = typeof msg === 'object' ? JSON.stringify(msg, null, 2) : msg;
+        }
+    </script>
+</body>
+</html>

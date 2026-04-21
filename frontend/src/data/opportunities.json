@@ -1,0 +1,37 @@
+[
+  {
+    "summary": "Investment opportunity in tech startup",
+    "companyName": "TechStart Inc.",
+    "location": "San Francisco, CA",
+    "purchasePrice": 50000,
+    "profitPercentage": 25,
+    "productName": "Cloud Platform",
+    "specialRequirement": "Requires tech expertise"
+  },
+  {
+    "summary": "Real estate development project",
+    "companyName": "BuildRight Properties",
+    "location": "Austin, TX",
+    "purchasePrice": 150000,
+    "profitPercentage": 35,
+    "productName": "Commercial Complex",
+    "specialRequirement": "Zoning approval required"
+  },
+  {
+    "summary": "E-commerce retail expansion",
+    "companyName": "ShopHub Ltd.",
+    "location": "Seattle, WA",
+    "purchasePrice": 75000,
+    "profitPercentage": 20,
+    "productName": "Online Marketplace"
+  },
+  {
+    "summary": "Manufacturing facility upgrade",
+    "companyName": "IndustrialCorp",
+    "location": "Detroit, MI",
+    "purchasePrice": 200000,
+    "profitPercentage": 18,
+    "productName": "Smart Factory System",
+    "specialRequirement": "Heavy equipment installation needed"
+  }
+]

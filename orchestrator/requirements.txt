@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+langgraph
+langchain-google-genai
+langchain-community
+pydantic
+python-dotenv
+sse-starlette
+pinecone
+sentence-transformers
+uvicorn
+# Optional: Uncomment below only if using OpenAI embeddings instead of HuggingFace
+# langchain-openai
+# openai

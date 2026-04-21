@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  orchestrator:
+    build: 
+      context: .
+      dockerfile: orchestrator/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./orchestrator:/app
+      - ./shared:/shared
+    deploy:
+      resources:
+        limits:
+          memory: 2G # Protects 8GB RAM Laptop
+
+  worker:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./worker:/app
+      - ./data:/app/data
