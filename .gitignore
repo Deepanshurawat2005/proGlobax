@@ -31,3 +31,6 @@ build/
 Thumbs.db
 
 /backend/vector_db/storage
+
+run.sh
+setup.sh
